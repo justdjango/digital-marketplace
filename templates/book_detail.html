@@ -1,9 +1,18 @@
-<html>
-<head>
-    <title>Book detail page</title>
-</head>
-<body>
-    <h1>This is the book detail</h1>
-    <p>{{ book }}</p>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item" aria-current="page">
+    <a href="{% url 'books:book-list' %}">Book List</a>
+</li>
+<li class="breadcrumb-item active" aria-current="page">
+    {{ book.title }}
+</li>
+{% endblock breadcrumb %}
+
+{% block content %}
+<h1>This is the book detail</h1>
+<p>{{ book }}</p>
+{% endblock content %}
+
+
+    

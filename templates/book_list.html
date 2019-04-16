@@ -8,7 +8,7 @@
 
 <h1>This is the book list</h1>
 {% for book in queryset %}
-    <p><a href="{% url 'books:book-detail' book.slug %}">{{ book }}</a></p>
+    <p><a href="{{ book.get_absolute_url }}">{{ book }}</a></p>
 {% endfor %}
 
 {% endblock content %}

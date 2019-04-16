@@ -5,7 +5,7 @@
     <a href="{% url 'books:book-list' %}">Book List</a>
 </li>
 <li class="breadcrumb-item" aria-current="page">
-   <a href="{% url 'books:book-detail' chapter.book.slug %}">
+   <a href="{{ chapter.book.get_absolute_url }}">
     {{ chapter.book.title }}
     </a>
 </li>
@@ -21,7 +21,7 @@
 
     <ul>
         {% for exercise in chapter.exercise_set.all %}
-            <li><a href="{% url 'books:exercise-detail' chapter.book.slug chapter.chapter_number exercise.exercise_number %}">{{ exercise.title }}</a></li>
+            <li><a href="{{ exercise.get_absolute_url }}">{{ exercise.title }}</a></li>
         {% endfor %}
     </ul>
 {% endblock content %}

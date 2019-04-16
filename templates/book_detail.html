@@ -15,7 +15,7 @@
 <ul>
 {% for chapter in book.chapter_set.all %}
     <li>
-        <a href="{% url 'books:chapter-detail' book.slug chapter.chapter_number %}">
+        <a href="{{ chapter.get_absolute_url }}">
         {{ chapter.title }}
         </a>
     </li>

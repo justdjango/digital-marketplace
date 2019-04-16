@@ -20,8 +20,49 @@
 {% endblock breadcrumb %}
 
 {% block content %}
-    <h1>This is the exercise detail</h1>
-    <p>{{ exercise.title }}</p>
-    <p>This exercise falls under the chapter: {{ exercise.chapter.title }}</p>
-    <p>This exercise falls under the book: {{ exercise.chapter.book.title }}</p>
+
+<div class="row">
+    <main class="col-md-4">
+    <div class="card" style="width: 18rem;">
+        <div class="card-header">{{ exercise.chapter.book.title }}</div>
+        <img src="{{ exercise.chapter.book.cover.url }}" class="card-img-top" alt="...">
+        <div class="card-body">
+            <p class="card-text">Published: {{ exercise.chapter.book.publication_date }}</p>
+        </div>
+    </div>
+
+    </main>
+
+    <aside class="col-md-8">
+    <div class="card">
+        <div class="card-header">
+            Solutions
+        </div>
+
+            {% for solution in exercise.solution_set.all %}
+            <div class="accordion" id="toggle-{{ solution.solution_number }}">
+                <div class="card">
+                    <div class="card-header" id="heading-{{ solution.solution_number }}">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse-{{ solution.solution_number }}" aria-expanded="true" aria-controls="collapse-{{ solution.solution_number }}">
+                        Solution {{ solution.solution_number }}
+                        </button>
+                    </h2>
+                    </div>
+
+                    <div id="collapse-{{ solution.solution_number }}" class="collapse" aria-labelledby="heading-{{ solution.solution_number }}" data-parent="#toggle-{{ solution.solution_number }}">
+                    <div class="card-body">
+                        <img src="{{ solution.image.url }}" class="card-img-top" alt="...">
+                    </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+    </div>
+    
+    </aside>
+</div>
+
+
 {% endblock content %}

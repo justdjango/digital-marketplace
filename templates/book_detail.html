@@ -23,15 +23,21 @@
     </main>
 
     <aside class="col-md-8">
-    {% for chapter in book.chapter_set.all %}
-        <div class="card">
-            <div class="card-body">
-                <a href="{{ chapter.get_absolute_url }}">
-                {{ chapter.chapter_number }}. {{ chapter.title }}
-                </a>
-            </div>
+    <div class="card">
+        <div class="card-header">
+            Chapters
         </div>
-    {% endfor %}
+        <ul class="list-group list-group-flush">
+            {% for chapter in book.chapter_set.all %}
+            <li class="list-group-item">
+            <a href="{{ chapter.get_absolute_url }}">
+                {{ chapter.chapter_number }}. {{ chapter.title }}
+            </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    
     </aside>
 </div>
 {% endblock content %}

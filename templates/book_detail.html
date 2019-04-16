@@ -12,7 +12,13 @@
 {% block content %}
 <h1>This is the book detail</h1>
 <p>{{ book }}</p>
+<ul>
+{% for chapter in book.chapter_set.all %}
+    <li>
+        <a href="{% url 'books:chapter-detail' book.slug chapter.chapter_number %}">
+        {{ chapter.title }}
+        </a>
+    </li>
+{% endfor %}
+</ul>
 {% endblock content %}
-
-
-    

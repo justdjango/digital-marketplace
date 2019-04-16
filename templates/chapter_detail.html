@@ -1,10 +1,21 @@
-<html>
-<head>
-    <title>Chapter detail page</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item" aria-current="page">
+    <a href="{% url 'books:book-list' %}">Book List</a>
+</li>
+<li class="breadcrumb-item" aria-current="page">
+   <a href="{% url 'books:book-detail' chapter.book.slug %}">
+    {{ chapter.book.title }}
+    </a>
+</li>
+<li class="breadcrumb-item active" aria-current="page">
+    {{ chapter }}
+</li>
+{% endblock breadcrumb %}
+
+{% block content %}
     <h1>This is the chapter detail</h1>
     <p>{{ chapter.title }}</p>
     <p>This chapter falls under {{ chapter.book.title }}</p>
-</body>
-</html>
+{% endblock content %}

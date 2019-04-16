@@ -18,4 +18,10 @@
     <h1>This is the chapter detail</h1>
     <p>{{ chapter.title }}</p>
     <p>This chapter falls under {{ chapter.book.title }}</p>
+
+    <ul>
+        {% for exercise in chapter.exercise_set.all %}
+            <li><a href="{% url 'books:exercise-detail' chapter.book.slug chapter.chapter_number exercise.exercise_number %}">{{ exercise.title }}</a></li>
+        {% endfor %}
+    </ul>
 {% endblock content %}

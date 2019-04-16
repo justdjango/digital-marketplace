@@ -1,11 +1,27 @@
-<html>
-<head>
-    <title>Exercise detail page</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item" aria-current="page">
+    <a href="{% url 'books:book-list' %}">Book List</a>
+</li>
+<li class="breadcrumb-item" aria-current="page">
+   <a href="{% url 'books:book-detail' exercise.chapter.book.slug %}">
+    {{ exercise.chapter.book.title }}
+    </a>
+</li>
+<li class="breadcrumb-item" aria-current="page">
+    <a href="{% url 'books:chapter-detail' exercise.chapter.book.slug exercise.chapter.chapter_number %}">
+    {{ exercise.chapter.title }}
+    </a>
+</li>
+<li class="breadcrumb-item active" aria-current="page">
+    {{ exercise.title }}
+</li>
+{% endblock breadcrumb %}
+
+{% block content %}
     <h1>This is the exercise detail</h1>
     <p>{{ exercise.title }}</p>
     <p>This exercise falls under the chapter: {{ exercise.chapter.title }}</p>
     <p>This exercise falls under the book: {{ exercise.chapter.book.title }}</p>
-</body>
-</html>
+{% endblock content %}

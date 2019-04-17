@@ -36,7 +36,8 @@ INSTALLED_APPS = [
 
     # own apps
 
-    'books'
+    'books',
+    'shopping_cart'
 ]
 
 MIDDLEWARE = [

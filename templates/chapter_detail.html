@@ -18,14 +18,7 @@
 
 <div class="row">
     <main class="col-md-4">
-    <div class="card" style="width: 18rem;">
-        <div class="card-header">{{ chapter.book.title }}</div>
-        <img src="{{ chapter.book.cover.url }}" class="card-img-top" alt="...">
-        <div class="card-body">
-            <p class="card-text">Published: {{ chapter.book.publication_date }}</p>
-        </div>
-    </div>
-
+    {% include "book_snippet.html" with book=chapter.book %}
     </main>
 
     <aside class="col-md-8">

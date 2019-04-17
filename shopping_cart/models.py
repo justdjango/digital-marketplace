@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.db.models import Sum
 from django.db import models
 from books.models import Book
 
@@ -19,6 +20,9 @@ class Order(models.Model):
 
     def __str__(self):
         return self.user.username
+
+    def get_total(self):
+        return self.items.all().aggregate(order_total=Sum('book__price'))['order_total']
 
 
 class Payment(models.Model):

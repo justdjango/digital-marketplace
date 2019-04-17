@@ -16,11 +16,15 @@ def book_list(request):
 def book_detail(request, slug):
     # display a list of the chapters in this book
     book = get_object_or_404(Book, slug=slug)
-    order = Order.objects.get(user=request.user)
-    order_item = OrderItem.objects.get(book=book)
+    order_qs = Order.objects.filter(user=request.user)
     book_is_in_cart = False
-    if order_item in order.items.all():
-        book_is_in_cart = True
+    if order_qs.exists():
+        order = order_qs[0]
+        order_item_qs = OrderItem.objects.filter(book=book)
+        if order_item_qs.exists():
+            order_item = order_item_qs[0]
+            if order_item in order.items.all():
+                book_is_in_cart = True
     context = {
         'book': book,
         'in_cart': book_is_in_cart

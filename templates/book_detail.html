@@ -20,7 +20,7 @@
         </div>
         <div class="card-footer">
         {% if in_cart %}
-        <a href="#" class="btn btn-default btn-block">
+        <a href="{% url 'cart:remove-from-cart' book.slug %}" class="btn btn-default btn-block">
             Remove from cart
         </a>
         {% else %}

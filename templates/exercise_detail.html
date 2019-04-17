@@ -33,7 +33,7 @@
             Solutions
         </div>
 
-            {% if exercise.chapter.book in request.user.userlibrary.book_list %}
+            {% if book_status == 'owned' %}
 
             {% for solution in exercise.solution_set.all %}
             <div class="accordion" id="toggle-{{ solution.solution_number }}">

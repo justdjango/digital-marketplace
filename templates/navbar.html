@@ -1,3 +1,5 @@
+{% load cart_template_tags %}
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light rounded">
 <a class="navbar-brand" href="{% url 'books:book-list' %}">Marketplace</a>
 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample09" aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
@@ -9,6 +11,12 @@
     {% if request.user.is_authenticated %}
     <li class="nav-item">
         <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#">
+        {{ request.user|cart_item_count }}
+        <i class="fas fa-shopping-cart"></i>
+        </a>
     </li>
     {% else %}
     <li class="nav-item">

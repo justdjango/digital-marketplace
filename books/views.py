@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404
 from .models import Book, Chapter, Exercise
@@ -31,6 +32,7 @@ def book_list(request):
     return render(request, "book_list.html", context)
 
 
+@login_required
 def book_detail(request, slug):
     # display a list of the chapters in this book
     book = get_object_or_404(Book, slug=slug)
@@ -42,6 +44,7 @@ def book_detail(request, slug):
     return render(request, "book_detail.html", context)
 
 
+@login_required
 def chapter_detail(request, book_slug, chapter_number):
     # display a list of the exercises in the chapter
     chapter_qs = Chapter.objects \
@@ -58,6 +61,7 @@ def chapter_detail(request, book_slug, chapter_number):
     return Http404
 
 
+@login_required
 def exercise_detail(request, book_slug, chapter_number, exercise_number):
     exercise_qs = Exercise.objects \
         .filter(chapter__book__slug=book_slug) \

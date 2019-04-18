@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
@@ -14,6 +15,7 @@ def create_ref_code():
     return ''.join(random.choices(string.ascii_uppercase + string.digits, k=15))
 
 
+@login_required
 def add_to_cart(request, book_slug):
     book = get_object_or_404(Book, slug=book_slug)
     order_item, created = OrderItem.objects.get_or_create(book=book)
@@ -23,6 +25,7 @@ def add_to_cart(request, book_slug):
     return HttpResponseRedirect(request.META.get("HTTP_REFERER"))
 
 
+@login_required
 def remove_from_cart(request, book_slug):
     book = get_object_or_404(Book, slug=book_slug)
     order_item = get_object_or_404(OrderItem, book=book)
@@ -32,6 +35,7 @@ def remove_from_cart(request, book_slug):
     return HttpResponseRedirect(request.META.get("HTTP_REFERER"))
 
 
+@login_required
 def order_view(request):
     order = get_object_or_404(Order, user=request.user)
     context = {
@@ -40,6 +44,7 @@ def order_view(request):
     return render(request, "order_summary.html", context)
 
 
+@login_required
 def checkout(request):
     order = get_object_or_404(Order, user=request.user)
     if request.method == "POST":

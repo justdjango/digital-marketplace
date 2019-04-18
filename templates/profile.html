@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Previous orders</h1>
+<hr />
+
+<table class="table table-hover table-bordered text-center">
+    <tr class="text-center">
+        <th>no.</th>
+        <th>Reference code</th>
+        <th>Amount</th>
+        <th>Date</th>
+    </tr>
+    {% for order in orders %}
+    <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ order.ref_code }}</td>
+        <td>${{ order.get_total }}</td>
+        <td>{{ order.payment_set.first.date_paid }}</td>
+
+    </tr>
+    {% empty %}
+    <tr>
+    <td colspan="4">
+        You have not purchased anything
+    </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock content %}
+
+
+    

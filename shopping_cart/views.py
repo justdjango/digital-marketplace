@@ -57,6 +57,7 @@ def checkout(request):
 
         # create a stripe charge
         token = request.POST.get('stripeToken')
+        print(token)
         charge = stripe.Charge.create(
             amount=int(order.get_total() * 100),  # cents
             currency="usd",

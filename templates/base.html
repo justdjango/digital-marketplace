@@ -15,12 +15,8 @@
 
     {% include 'messages.html' %}
 
-    <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        {% block breadcrumb %}
-        {% endblock breadcrumb %}
-    </ol>
-    </nav>
+    {% block breadcrumb %}
+    {% endblock breadcrumb %}
     
     {% block content %}
     {% endblock content %}

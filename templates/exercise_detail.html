@@ -2,6 +2,8 @@
 {% load static %}
 
 {% block breadcrumb %}
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb">
 <li class="breadcrumb-item" aria-current="page">
     <a href="{% url 'books:book-list' %}">Book List</a>
 </li>
@@ -18,6 +20,9 @@
 <li class="breadcrumb-item active" aria-current="page">
     {{ exercise.title }}
 </li>
+</ol>
+</nav>
+
 {% endblock breadcrumb %}
 
 {% block content %}

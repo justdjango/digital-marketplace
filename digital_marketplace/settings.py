@@ -140,3 +140,8 @@ LOGIN_REDIRECT_URL = '/'
 
 # Django crispy forms
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# Stripe settings
+
+STRIPE_PUBLISH_KEY = ''
+STRIPE_SECRET_KEY = ''

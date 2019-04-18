@@ -54,7 +54,7 @@
     {% if order.get_total %}
     <tr>
         <td colspan="3">
-            <a href="#" class="btn btn-primary pull-left">
+            <a href="{% url 'cart:checkout' %}" class="btn btn-primary pull-left">
                 Checkout
             </a>
         </td>

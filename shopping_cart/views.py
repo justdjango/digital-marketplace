@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from django.conf import settings
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
@@ -22,6 +23,7 @@ def add_to_cart(request, book_slug):
     order, created = Order.objects.get_or_create(user=request.user)
     order.items.add(order_item)
     order.save()
+    messages.info(request, "Item successfully added to your cart.")
     return HttpResponseRedirect(request.META.get("HTTP_REFERER"))
 
 
@@ -32,6 +34,7 @@ def remove_from_cart(request, book_slug):
     order = get_object_or_404(Order, user=request.user)
     order.items.remove(order_item)
     order.save()
+    messages.info(request, "Item successfully removed from your cart.")
     return HttpResponseRedirect(request.META.get("HTTP_REFERER"))
 
 

@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.conf import settings
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from books.models import Book
@@ -21,7 +21,8 @@ def create_ref_code():
 def add_to_cart(request, book_slug):
     book = get_object_or_404(Book, slug=book_slug)
     order_item, created = OrderItem.objects.get_or_create(book=book)
-    order, created = Order.objects.get_or_create(user=request.user)
+    order, created = Order.objects.get_or_create(
+        user=request.user, is_ordered=False)
     order.items.add(order_item)
     order.save()
     messages.info(request, "Item successfully added to your cart.")
@@ -32,7 +33,7 @@ def add_to_cart(request, book_slug):
 def remove_from_cart(request, book_slug):
     book = get_object_or_404(Book, slug=book_slug)
     order_item = get_object_or_404(OrderItem, book=book)
-    order = get_object_or_404(Order, user=request.user)
+    order = Order.objects.get(user=request.user, is_ordered=False)
     order.items.remove(order_item)
     order.save()
     messages.info(request, "Item successfully removed from your cart.")
@@ -41,16 +42,23 @@ def remove_from_cart(request, book_slug):
 
 @login_required
 def order_view(request):
-    order = get_object_or_404(Order, user=request.user)
-    context = {
-        'order': order
-    }
-    return render(request, "order_summary.html", context)
+    order_qs = Order.objects.filter(user=request.user, is_ordered=False)
+    if order_qs.exists():
+        context = {
+            'order': order_qs[0]
+        }
+        return render(request, "order_summary.html", context)
+    return Http404
 
 
 @login_required
 def checkout(request):
-    order = get_object_or_404(Order, user=request.user)
+    order_qs = Order.objects.filter(user=request.user, is_ordered=False)
+    if order_qs.exists():
+        order = order_qs[0]
+    else:
+        return Http404
+
     if request.method == "POST":
 
         try:
@@ -82,6 +90,7 @@ def checkout(request):
             order.save()
 
             # redirect to the users profile
+            messages.success(request, "Your order was successful!")
             return redirect("/account/profile/")
 
         # send email to yourself

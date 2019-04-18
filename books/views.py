@@ -12,7 +12,7 @@ NOT_IN_CART = 'not_in_cart'
 def check_book_relationship(request, book):
     if book in request.user.userlibrary.book_list():
         return OWNED
-    order_qs = Order.objects.filter(user=request.user)
+    order_qs = Order.objects.filter(user=request.user, is_ordered=False)
     if order_qs.exists():
         order = order_qs[0]
         order_item_qs = OrderItem.objects.filter(book=book)

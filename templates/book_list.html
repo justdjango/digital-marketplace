@@ -12,21 +12,26 @@
 
 <h1>This is the book list</h1>
 <hr />
+
+<div class="row">
 {% for book in queryset %}
+<div class="col-4">
     <div class="card" style="width: 18rem;">
-    <div class="card-body">
-        <h5 class="card-title">{{ book.title }}</h5>
-        <h6 class="card-subtitle mb-2 text-muted">{{ book.publication_date }}</h6>
-        <p class="card-text">
-            {% for author in book.authors.all %}
-                <span>{{ author }}</span> 
-                {% if book.authors.count > 1 %} | {% endif %}
-            {% endfor %}
-        </p>
-        <a href="{{ book.get_absolute_url }}" class="card-link">{{ book }}</a>
+        <div class="card-body">
+            <h5 class="card-title">{{ book.title }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{ book.publication_date }}</h6>
+            <p class="card-text">
+                {% for author in book.authors.all %}
+                    <span>{{ author }}</span> 
+                    {% if book.authors.count > 1 %} | {% endif %}
+                {% endfor %}
+            </p>
+            <a href="{{ book.get_absolute_url }}" class="card-link">{{ book }}</a>
+        </div>
     </div>
-    </div>
+</div>
 {% endfor %}
+</div>
 
 {% endblock content %}
 

@@ -2,7 +2,7 @@
 
 This is a digital marketplace website built with Django. The website displays electronic products, focussing on e-book textbooks. Users can add and remove products to/from their cart, and purchase access to the solutions provided by each book. Payments are handled with Stripe.
 
-[![alt text](https://github.com/justdjango/digital_marketplace/blob/master/thumbnail.png "Logo")](https://www.justdjango.com/courses/build-a-digital-marketplace/)
+[![alt text](https://github.com/justdjango/digital-marketplace/blob/master/thumbnail.png "Logo")](https://www.justdjango.com/courses/build-a-digital-marketplace/)
 
 [Click here](https://www.justdjango.com/courses/build-a-digital-marketplace/) to follow along with the tutorial.
 
